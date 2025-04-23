@@ -19,7 +19,7 @@ class NavBar extends StatelessWidget {
                 width: MediaQuery.of(context).size.width < 600
                     ? MediaQuery.of(context).size.width / 3
                     : MediaQuery.of(context).size.width / 4,
-                child: Image.asset("assets/images/logo.png")),
+                child: Image.asset("assets/images/logo.gif")),
             const Spacer(),
             MediaQuery.of(context).size.width < 600
                 ? InkWell(

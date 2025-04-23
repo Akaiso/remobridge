@@ -247,7 +247,7 @@ class LearnMorePageState extends State<LearnMorePage> {
                                       : BorderRadius.circular(20)),
                           clipBehavior: Clip.hardEdge,
                           child:
-                              Image.asset("assets/images/remote_worker.jpg")),
+                              Image.asset("assets/images/remote_worker.gif")),
                     ))
               ],
             ),

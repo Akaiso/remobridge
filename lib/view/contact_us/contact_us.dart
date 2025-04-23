@@ -27,7 +27,7 @@ class ContactUsPageState extends State<ContactUsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.white,
       appBar: MediaQuery.of(context).size.width < 600
           ? AppBar(
               leading: IconButton(
@@ -134,7 +134,28 @@ class ContactUsPageState extends State<ContactUsPage> {
               ),
             ),
           ),
-          Expanded(flex: 1, child: Image.asset("assets/images/customer_support.png", width: 100, height: 500,))
+          Expanded(flex: 1, child:Image.asset("assets/images/customer_support.gif", width: 100, height: 500,)
+
+
+          // Container(
+          //     decoration: BoxDecoration(
+          //         boxShadow: [
+          //
+          //           BoxShadow(
+          //             color: Colors.grey.withOpacity(0.7), // Shadow color
+          //             spreadRadius: 3, // How much the shadow spreads
+          //             blurRadius: 9, // How soft the shadow is
+          //             offset: Offset(0, 3), // X and Y offset
+          //           ),
+          //
+          //         ],
+          //         borderRadius:
+          //         BorderRadius.circular(20)),
+          //     clipBehavior: Clip.hardEdge,
+          //     child:
+          //     )
+
+          )
         ],
       ),
     );

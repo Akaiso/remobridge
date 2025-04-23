@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(backgroundColor: Colors.white,
+        child: Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         onPressed: () {},
@@ -106,8 +106,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.white,elevation: 0,
-        scrolledUnderElevation: 0,
+        backgroundColor: Colors.transparent,
         toolbarHeight: 100,
         title: NavBar(action: () {
           _scrollToSection(_section2Key);
@@ -371,7 +370,7 @@ class _HomePageState extends State<HomePage> {
                             ? Container()
                             : Expanded(
                                 flex: 2,
-                                child: Image.asset("assets/images/lappy.gif")),
+                                child: Image.asset("assets/images/lappy.jpg")),
                       ],
                     ),
                   ),

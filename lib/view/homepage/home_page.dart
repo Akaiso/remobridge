@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:remobridge/utility/buttons.dart';
 import 'package:remobridge/view/homepage/nav_bar.dart';
-
+import 'dart:html' as html;
 import '../../utility/text_styles.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,6 +27,10 @@ class _HomePageState extends State<HomePage> {
         curve: Curves.easeInOut,
       );
     }
+  }
+
+  void launchURLInNewTab(String url) {
+    html.window.open(url, '_blank');
   }
 
   @override
@@ -91,12 +95,13 @@ class _HomePageState extends State<HomePage> {
             ),
             InkWell(
                 onTap: () {
-                  Get.offAndToNamed('/learnMore');
+                  launchURLInNewTab('https://remobridgeapplication.vercel.app');
+                 // Get.offAndToNamed('/learnMore');
                 },
                 child: const NavText(text: "Learn more")),
             const Spacer(),
             Text(
-              "remobridge.inc",
+              "RemobridgeAfrica",
               style: GoogleFonts.poppins(fontSize: 10, color: Colors.blue),
             ),
             const SizedBox(
@@ -149,7 +154,8 @@ class _HomePageState extends State<HomePage> {
                             MainButton(
                                 title: "Learn more",
                                 function: () {
-                                  Get.toNamed('/learnMore');
+                                  launchURLInNewTab('https://remobridgeapplication.vercel.app');
+                                 // Get.toNamed('/learnMore');
                                 }),
                           ],
                         )
@@ -181,7 +187,8 @@ class _HomePageState extends State<HomePage> {
                                   MainButton(
                                       title: "Learn more",
                                       function: () {
-                                        Get.toNamed('/learnMore');
+                                        launchURLInNewTab('https://remobridgeapplication.vercel.app');
+                                       // Get.toNamed('/learnMore');
                                       })
                                 ],
                               ),
@@ -387,7 +394,8 @@ class _HomePageState extends State<HomePage> {
                   MainButton(
                       title: "Learn More",
                       function: () {
-                        Get.toNamed('/learnMore');
+                        launchURLInNewTab('https://remobridgeapplication.vercel.app');
+                       // Get.toNamed('/learnMore');
                       }),
                   const SizedBox(
                     height: 100,

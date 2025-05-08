@@ -126,27 +126,31 @@ class ContactUsPageState extends State<ContactUsPage> {
 
                   padding: EdgeInsets.only(left: 100, top: 100, right: 0, bottom: 100),
               child:
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start
-                ,
-                children: [
-                  Text('We’re here to help, answer your questions, or just have a chat — directly and personally.'),
-                  Text("Whether you're reaching out with an inquiry, a request, or simply want to learn more about what we do, we believe in real conversations and fast responses. That’s why we’ve made it easy to connect with us via WhatsApp."),
-                  SizedBox(height: 30,),
-                  Text( '📱 Chat With Us on WhatsApp', style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue)),
-                  SizedBox(height: 10,),
-                  Text('For quick responses and personalized support, send us a message anytime.'),
-                  SizedBox(height: 10,),
-                  Text('WhatsApp: +2348138442423', style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue)),
-                  SizedBox(height: 10,),
-                  Text('We’re usually available Monday to Friday, 9AM – 6PM, and we do our best to respond promptly outside those hours too.'),
-                ],
+              SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start
+                  ,
+                  children: [
+                    Text('We’re here to help, answer your questions, or just have a chat — directly and personally.'),
+                    Text("Whether you're reaching out with an inquiry, a request, or simply want to learn more about what we do, we believe in real conversations and fast responses. That’s why we’ve made it easy to connect with us via WhatsApp."),
+                    SizedBox(height: 30,),
+                    Text( '📱 Chat With Us on WhatsApp', style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue)),
+                    SizedBox(height: 10,),
+                    Text('For quick responses and personalized support, send us a message anytime.'),
+                    SizedBox(height: 10,),
+                    SelectableText('WhatsApp: +2348138442423', style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue)),
+                    SizedBox(height: 10,),
+                    Text('📌 Flat 2 Block 115, 14 Yalinga Street, off Adetokunbo Ademola Crescent, Wuse 2, Abuja 900288, Federal Capital Territory.'),
+                    SizedBox(height: 10,),
+                    Text('We’re usually available Monday to Friday, 9AM – 6PM, and we do our best to respond promptly outside those hours too.'),
+                  ],
+                ),
               ),
               // Form(
               //   key: _formKey,

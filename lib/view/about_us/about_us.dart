@@ -103,7 +103,7 @@ class AboutUsPage extends StatelessWidget {
             const SizedBox(height: 8),
             const Text(
               //   'Email: support@remobridge.app\nInstagram: @remobridge\nTwitter: @remobridge_io',
-              'Email: remobridgesupport@outlook.com\n',
+              'Email: remobridge@outlook.com\n',
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 40),

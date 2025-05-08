@@ -37,11 +37,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.teal,
+        isExtended: true,
         onPressed: () {},
-        child: const Text(
-          "Chat",
+        tooltip: "Chatbot launching soon",
+        label: const Text(
+          "Chatbot in progress",
           style: TextStyle(color: Colors.white),
         ),
       ),

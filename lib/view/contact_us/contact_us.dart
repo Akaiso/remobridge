@@ -146,7 +146,7 @@ class ContactUsPageState extends State<ContactUsPage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.blue)),
                     SizedBox(height: 10,),
-                    Text('📌 Flat 2 Block 115, 14 Yalinga Street, off Adetokunbo Ademola Crescent, Wuse 2, Abuja 900288, Federal Capital Territory.'),
+                    Text('📌 14 Yalinga Street, off Adetokunbo Ademola Crescent, Wuse 2, Abuja 900288, Federal Capital Territory.'),
                     SizedBox(height: 10,),
                     Text('We’re usually available Monday to Friday, 9AM – 6PM, and we do our best to respond promptly outside those hours too.'),
                   ],

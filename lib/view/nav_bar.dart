@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:remobridge/utility/buttons.dart';
 import 'dart:html' as html;
 
-import '../../utility/text_styles.dart';
+import '../utility/text_styles.dart';
 
 class NavBar extends StatefulWidget {
   final VoidCallback action;

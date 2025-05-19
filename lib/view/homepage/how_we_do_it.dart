@@ -246,62 +246,65 @@ class _HowWeDoItState extends State<HowWeDoIt> {
 
               ///HOW WE DO IT MOBILE VIEW
 
-              Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const Row(
-                      children: [
-                        SubHeadlineText(text: "How"),
-                        SubHeadlineText(
-                          text: "We",
-                          color: Colors.redAccent,
-                        ),
-                        SubHeadlineText(text: "Do It")
-                      ],
-                    ),
-                    howWeDoItMobile(
-                        onPressed: () {
-                          setState(() {
-                            isTtVisible = !isTtVisible;
-                          });
-                        },
-                        visible: isTtVisible,
-                        brief: howWeDoItBriefs[0],
-                        title: "Technology Training",
-                        image: "assets/images/tt_image.jpg"),
-                    howWeDoItMobile(
-                        onPressed: () {
-                          setState(() {
-                            isTpVisible = !isTpVisible;
-                          });
-                        },
-                        visible: isTpVisible,
-                        brief: howWeDoItBriefs[1],
-                        title: 'Talent Placement',
-                        image: 'assets/images/tp_image.jpg'),
-                    howWeDoItMobile(
-                        title: "Project Implementation",
-                        onPressed: () {
-                          setState(() {
-                            isPiVisible = !isPiVisible;
-                          });
-                        },
-                        visible: isPiVisible,
-                        image: "assets/images/pi_image.png",
-                        brief: howWeDoItBriefs[2]),
-                    howWeDoItMobile(
-                        title: "Venture Building",
-                        onPressed: () {
-                          setState(() {
-                            isVbVisible = !isVbVisible;
-                          });
-                        },
-                        visible: isVbVisible,
-                        image: "assets/images/vb_image.png",
-                        brief: howWeDoItBriefs[3]),
-                    const Divider()
-                  ],
-                )
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width < 600 ? 30:0),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Row(
+                        children: [
+                          SubHeadlineText(text: "How"),
+                          SubHeadlineText(
+                            text: "We",
+                            color: Colors.redAccent,
+                          ),
+                          SubHeadlineText(text: "Do It")
+                        ],
+                      ),
+                      howWeDoItMobile(
+                          onPressed: () {
+                            setState(() {
+                              isTtVisible = !isTtVisible;
+                            });
+                          },
+                          visible: isTtVisible,
+                          brief: howWeDoItBriefs[0],
+                          title: "Technology Training",
+                          image: "assets/images/tt_image.jpg"),
+                      howWeDoItMobile(
+                          onPressed: () {
+                            setState(() {
+                              isTpVisible = !isTpVisible;
+                            });
+                          },
+                          visible: isTpVisible,
+                          brief: howWeDoItBriefs[1],
+                          title: 'Talent Placement',
+                          image: 'assets/images/tp_image.jpg'),
+                      howWeDoItMobile(
+                          title: "Project Implementation",
+                          onPressed: () {
+                            setState(() {
+                              isPiVisible = !isPiVisible;
+                            });
+                          },
+                          visible: isPiVisible,
+                          image: "assets/images/pi_image.png",
+                          brief: howWeDoItBriefs[2]),
+                      howWeDoItMobile(
+                          title: "Venture Building",
+                          onPressed: () {
+                            setState(() {
+                              isVbVisible = !isVbVisible;
+                            });
+                          },
+                          visible: isVbVisible,
+                          image: "assets/images/vb_image.png",
+                          brief: howWeDoItBriefs[3]),
+                      const Divider()
+                    ],
+                  ),
+              )
 
               ///HOW WE DO IT WEB VIEW
               : Row(

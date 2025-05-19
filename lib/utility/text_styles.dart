@@ -5,15 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 
 class HeadlineText extends StatelessWidget {
   final String text ;
-    const HeadlineText({super.key, required this.text });
+  final Color? color;
+    const HeadlineText({super.key, required this.text, this.color });
 
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.left,
-      text,minFontSize: 10,
-      style: GoogleFonts.poppins(letterSpacing: 2,
-        fontWeight: FontWeight.w800,
-        fontSize: 35,
+      text,minFontSize: 20,
+     // maxFontSize: 100,
+      style: GoogleFonts.montserrat(
+        fontWeight: FontWeight.w700,
+        color: color ?? const Color(0xff336666) ,
+        fontSize: MediaQuery.of(context).size.width < 600 ? 25 :40,
       ),
     );
   }
@@ -21,14 +24,16 @@ class HeadlineText extends StatelessWidget {
 
 class SubHeadlineText extends StatelessWidget {
   final String text ;
-  const SubHeadlineText({super.key, required this.text });
+  final Color? color;
+  const SubHeadlineText({super.key, required this.text, this.color });
 
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.left,
-      text,minFontSize: 10,
+      text,minFontSize: 18,
       style: GoogleFonts.poppins(letterSpacing: 0,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w600,
+        color: color ?? const Color(0xff336666),
         fontSize: 25,
       ),
     );
@@ -59,10 +64,30 @@ class BodyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.left,
-      text,minFontSize: 10,
-      style: GoogleFonts.poppins(letterSpacing: 0,
-        fontWeight: FontWeight.w300,
-        fontSize: 20,
+      text,minFontSize: 8,
+      maxFontSize: 15,
+      style: GoogleFonts.montserrat(
+        fontWeight: FontWeight.w500,
+       // color: Colors.black,
+
+      ),
+    );
+  }
+}
+
+class BodyTextMedium extends StatelessWidget {
+  final String text ;
+  const BodyTextMedium({super.key, required this.text });
+
+  @override
+  Widget build(BuildContext context) {
+    return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.left,
+      text,minFontSize: 20,
+      maxFontSize: 25,
+      style: GoogleFonts.montserrat(
+        fontWeight: FontWeight.w500,
+        // color: Colors.black,
+
       ),
     );
   }
@@ -95,7 +120,7 @@ class WhiteLeftJustifiedBodyText extends StatelessWidget {
     return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.left : TextAlign.left,
       text,minFontSize: 10,
       style: GoogleFonts.poppins(letterSpacing: 0,
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.w400,
         color: Colors.white,
         fontSize: 20,
       ),
@@ -106,12 +131,14 @@ class WhiteLeftJustifiedBodyText extends StatelessWidget {
 
 class NavText extends StatelessWidget {
   final String text;
-  const NavText({super.key, required this.text});
+  final Color color;
+  const NavText({super.key, required this.text, required this.color});
 
   @override
   Widget build(BuildContext context) {
-    return  AutoSizeText(text, style: const TextStyle(
+    return  AutoSizeText(text, style: TextStyle(
       fontWeight: FontWeight.w700,
+      color: color,
       fontSize: 15,
     ),);
   }

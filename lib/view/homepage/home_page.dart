@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:remobridge/utility/buttons.dart';
+import 'package:remobridge/view/homepage/how_we_do_it.dart';
 import 'package:remobridge/view/homepage/nav_bar.dart';
 import 'dart:html' as html;
 import '../../utility/text_styles.dart';
@@ -16,8 +17,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
+  final ScrollController toTopScrollController = ScrollController();
   final GlobalKey _section2Key = GlobalKey();
 
+  ///FOR THE DRAWER BUT NOT SURE IF IT IS USEFUL COS IT WORKS WITHOUT THIS FUNCTION - Source ChatGPT
   void _scrollToSection(GlobalKey key) {
     final context = key.currentContext;
     if (context != null) {
@@ -29,24 +32,52 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void _scrollToTop(){
+    _scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+  }
+
   void launchURLInNewTab(String url) {
     html.window.open(url, '_blank');
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _scrollController.dispose();
+    super.dispose();
+
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.teal,
-        isExtended: true,
-        onPressed: () {},
-        tooltip: "Chatbot launching soon",
-        label: const Text(
-          "Chatbot in progress",
-          style: TextStyle(color: Colors.white),
+      backgroundColor: Colors.white,
+      floatingActionButton: Container(
+        height: 50,width: 50,clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: FloatingActionButton(
+          backgroundColor: const Color(0xfffdbc5a),
+          onPressed: () {_scrollToTop();},
+          tooltip: "scroll to top",
+          child: const Icon(Icons.arrow_upward , color: Colors.black,),
+
         ),
       ),
+
+          ///FOR EXTENDED FLOATING ACTION WITH MORE TEXT note: It doesn't have a child property when the .extended is added
+      // FloatingActionButton.extended(
+      //   backgroundColor: const Color(0xfffdbc5a),
+      //   isExtended: true,
+      //   onPressed: () {},
+      //   tooltip: "Chatbot launching soon",
+      //   label: const Text(
+      //     "Chatbot in progress",
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      // ),
       endDrawer: Drawer(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -57,8 +88,8 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Container(
-              height: 50,
-              color: Colors.blue,
+              height: 80,
+              color: Colors.redAccent,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -68,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () {
                         Get.back();
                       },
-                      icon: const Icon(Icons.close),
+                      icon: const Icon(Icons.close, color: Colors.white,),
                     ),
                   )
                 ],
@@ -81,7 +112,10 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   Get.offAndToNamed('/aboutUs');
                 },
-                child: const NavText(text: "About Us")),
+                child: const NavText(
+                  text: "About Us",
+                  color: Colors.black,
+                )),
             const Divider(),
             const SizedBox(
               height: 20,
@@ -90,7 +124,10 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   Get.offAndToNamed('/contactUs');
                 },
-                child: const NavText(text: "Contact Us")),
+                child: const NavText(
+                  text: "Contact Us",
+                  color: Colors.black,
+                )),
             const Divider(),
             const SizedBox(
               height: 20,
@@ -98,13 +135,13 @@ class _HomePageState extends State<HomePage> {
             InkWell(
                 onTap: () {
                   launchURLInNewTab('https://remobridgeapplication.vercel.app');
-                 // Get.offAndToNamed('/learnMore');
+                  // Get.offAndToNamed('/learnMore');
                 },
-                child: const NavText(text: "Learn more")),
+                child: const NavText(color: Colors.black, text: "Learn more")),
             const Spacer(),
             Text(
-              "RemobridgeAfrica",
-              style: GoogleFonts.poppins(fontSize: 10, color: Colors.blue),
+              "Remobridge.Africa",
+              style: GoogleFonts.poppins(fontSize: 10, color: Colors.redAccent),
             ),
             const SizedBox(
               height: 20,
@@ -130,24 +167,34 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.width < 600 ? 0 : 100,
+                    height: MediaQuery.of(context).size.height < 600 ? 50 : 50,
                   ),
                   MediaQuery.of(context).size.width < 600
                       ? Column(
                           children: [
-                            const Align(
-                              alignment: Alignment.center,
-                              child: HeadlineText(
-                                text: "Learn digital skills "
-                                    "and start earning \n"
-                                    "in dollars from home.",
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width / 9),
+                              child: const Align(
+                                heightFactor: 0.5,
+                                alignment: Alignment.center,
+                                child: HeadlineText(
+                                    text: "Empowering Talents for "
+                                        "the Global Digital Economy \n"),
                               ),
                             ),
-                            const Align(
-                              alignment: Alignment.center,
-                              child: BodyText(
-                                text:
-                                    "We don't just teach, we guide you to real results.",
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width / 9),
+                              child: const Align(
+                                alignment: Alignment.center,
+                                child: BodyText(
+                                    text:
+                                        "We empower individuals to become valuable in the global "
+                                        "digital economy and thrive as an employee or a business owner."
+                                        "Businesses also benefit from our pool of talents."),
                               ),
                             ),
                             const SizedBox(
@@ -156,236 +203,272 @@ class _HomePageState extends State<HomePage> {
                             MainButton(
                                 title: "Learn more",
                                 function: () {
-                                  launchURLInNewTab('https://remobridgeapplication.vercel.app');
-                                 // Get.toNamed('/learnMore');
+                                  launchURLInNewTab(
+                                      'https://remobridgeapplication.vercel.app');
+                                  // Get.toNamed('/learnMore');
                                 }),
                           ],
                         )
-                      : FittedBox(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                children: [
-                                  const Align(
-                                    alignment: Alignment.center,
-                                    child: HeadlineText(
-                                      text: "Learn digital skills "
-                                          "and start earning \n"
-                                          "in dollars from home.",
+                      : SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 3,
+                                  child: Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(
+                                          //  width: 500,
+                                          child: Align(
+                                            heightFactor: 0.5,
+                                            alignment: Alignment.center,
+                                            child: HeadlineText(
+                                              text: "Empowering Talents for "
+                                                  "the Global Digital Economy \n",
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        const Align(
+                                          alignment: Alignment.center,
+                                          child: BodyText(
+                                            text:
+                                                "We empower individuals to become valuable in the global "
+                                                "digital economy and thrive as an employee or a business owner."
+                                                "Businesses also benefit from our pool of talents.",
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        MainButton(
+                                            title: "Learn more",
+                                            function: () {
+                                              launchURLInNewTab(
+                                                  'https://remobridgeapplication.vercel.app');
+                                              // Get.toNamed('/learnMore');
+                                            })
+                                      ],
                                     ),
                                   ),
-                                  const Align(
-                                    alignment: Alignment.center,
-                                    child: BodyText(
-                                      text:
-                                          "We don't just teach, we guide you to real results.",
-                                    ),
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 8,
+                                ),
+                                Expanded(
+                                  child: Image.asset(
+                                    "assets/images/worldGif.gif",
+                                    width: 500,
                                   ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  MainButton(
-                                      title: "Learn more",
-                                      function: () {
-                                        launchURLInNewTab('https://remobridgeapplication.vercel.app');
-                                       // Get.toNamed('/learnMore');
-                                      })
-                                ],
-                              ),
-                              Image.asset(
-                                "assets/images/rotating_earth.gif",
-                                width: 200,
-                              )
-                            ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                   const SizedBox(
-                    height: 100,
+                    height: 120,
                   ),
                   MediaQuery.of(context).size.width < 600
-                      ? FittedBox(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SubHeadlineText(
-                                      text: "Here is how we help"),
-                                  Container(
-                                    height: 250,
-                                    width: 500,
-                                    padding: const EdgeInsets.only(
-                                        left: 30,
-                                        top: 40,
-                                        right: 30,
-                                        bottom: 20),
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: const WhiteLeftJustifiedBodyText(
-                                        text: "- Crafting winning proposals\n"
-                                            "- Building a professional profile that sells\n"
-                                            "- Positioning you on the right platforms\n"
-                                            "- Withdrawal without worries\n"
-                                            "- Hands-on Guidance & Real Support\n"
-                                            "- 24/7 Whatsapp support group"),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 50,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SubHeadlineText(text: "Why Onboard?"),
-                                  Container(
-                                    height: 250,
-                                    width: 500,
-                                    padding: const EdgeInsets.only(
-                                        left: 30,
-                                        top: 40,
-                                        right: 30,
-                                        bottom: 20),
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: const WhiteLeftJustifiedBodyText(
-                                        text:
-                                            "- Learn in-demand remote skills\n"
-                                            "- Get connected to job platforms\n"
-                                            "- Real results from real people\n"
-                                            "- Lower barrier to entry\n"
-                                            "- Access to all resources needed"),
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SubHeadlineText(text: "Our Strategy"),
+                                Container(
+                                  height: 250,
+                                  width: 500,
+                                  padding: const EdgeInsets.only(
+                                      left: 30, top: 40, right: 30, bottom: 20),
+                                  decoration: BoxDecoration(
+                                      color: Colors.redAccent,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: const Center(
+                                    child: WhiteLeftJustifiedBodyText(
+                                        text: "We empower individuals\n"
+                                            "to excel in the digital economy by\n"
+                                            "equipping them with world-class tech skills.\n"
+                                            "At the same time, we support entrepreneurs\n"
+                                            "in building impactful, job-generating businesses.\n"),
                                   ),
-                                ],
-                              )
-                            ],
-                          ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SubHeadlineText(text: ""),
+                                Container(
+                                  height: 250,
+                                  width: 500,
+                                  padding: const EdgeInsets.only(
+                                      left: 30, top: 40, right: 30, bottom: 20),
+                                  decoration: BoxDecoration(
+                                      color: Colors.redAccent,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: const Center(
+                                    child: WhiteLeftJustifiedBodyText(
+                                        text: "Driving digital transformation\n"
+                                            "forward in businesses, our solutions\n"
+                                            "span talent placement and project\n"
+                                            "execution -empowering business to \n"
+                                            "innovate and grow with confidence."),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
                         )
-                      : FittedBox(
+                      : Padding(
+                          padding: const EdgeInsets.only(left: 35.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SubHeadlineText(
-                                      text: "Here is how we help"),
-                                  Container(
-                                    height: 250,
-                                    width: 500,
-                                    padding: const EdgeInsets.only(
-                                        left: 30,
-                                        top: 40,
-                                        right: 30,
-                                        bottom: 20),
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: const WhiteBodyText(
-                                        text: "- Crafting winning proposals\n"
-                                            "- Building a professional profile that sells\n"
-                                            "- Positioning you on the right platforms\n"
-                                            "- Withdrawal without worries\n"
-                                            "- Hands-on Guidance & Real Support\n"),
-                                  )
-                                ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SubHeadlineText(text: "Our Strategy"),
+                                    Container(
+                                      height: 300,
+                                      width: 600,
+                                      padding: const EdgeInsets.only(
+                                          left: 30,
+                                          top: 40,
+                                          right: 30,
+                                          bottom: 20),
+                                      decoration: BoxDecoration(
+                                          color: Colors.redAccent,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: const Center(
+                                        child: WhiteBodyText(
+                                          text: "We empower individuals\n"
+                                              "to excel in the digital economy by\n"
+                                              "equipping them with world-class tech skills.\n"
+                                              "At the same time, we support entrepreneurs\n"
+                                              "in building impactful, job-generating businesses.\n",
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                              const SizedBox(
-                                width: 100,
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 8,
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SubHeadlineText(text: "Key benefits"),
-                                  Container(
-                                    height: 250,
-                                    width: 500,
-                                    padding: const EdgeInsets.only(
-                                        left: 30,
-                                        top: 40,
-                                        right: 30,
-                                        bottom: 20),
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: const WhiteBodyText(
-                                        text:
-                                            "- Learn in-demand remote skills\n"
-                                            "- Get connected to job platforms\n"
-                                            "- Real results from real people\n"
-                                            "- Lower barrier to entry\n"
-                                            "- Access to all required resources "),
-                                  ),
-                                ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SubHeadlineText(text: ""),
+                                    Container(
+                                      height: 300,
+                                      width: 600,
+                                      padding: const EdgeInsets.only(
+                                          left: 30,
+                                          top: 40,
+                                          right: 30,
+                                          bottom: 20),
+                                      decoration: BoxDecoration(
+                                          color: Colors.redAccent,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: const Center(
+                                        child: WhiteBodyText(
+                                            text:
+                                                "Driving digital transformation\n"
+                                                "forward in businesses, our solutions\n"
+                                                "span talent placement and project\n"
+                                                "execution -empowering business to \n"
+                                                "innovate and grow with confidence."),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               )
                             ],
                           ),
                         ),
 
                   ///MISSION AND VISION
-                  const SizedBox(
-                    height: 200,
-                  ),
-                  const HeadlineText(
-                    text: "Why?",
-                  ),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  Container(
-                    color: Colors.white,
-                    height: 350,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MediaQuery.of(context).size.width < 800
-                            ? Container()
-                            : Expanded(
-                                flex: 2,
-                                child: Image.asset(
-                                  "assets/images/abstract.gif",
-                                  fit: BoxFit.contain,
-                                )),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        const Expanded(
-                          flex: 4,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 30),
-                            child: BodyText(
-                              text: "Millions of capable individuals in Nigeria"
-                                  " remain unemployed or underpaid due to lack of access"
-                                  " to global opportunities."
-                                  " hence, our vision is to empower Nigerians with"
-                                  " digital skills that open doors to remote jobs paying"
-                                  " in dollars - right from the comfort of their homes.",
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        MediaQuery.of(context).size.width < 600
-                            ? Container()
-                            : Expanded(
-                                flex: 2,
-                                child: Image.asset("assets/images/lappy.jpg")),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 100,
-                  ),
+                  // const SizedBox(
+                  //   height: 120,
+                  // ),
+                  // const HeadlineText(
+                  //   text: "Why?",
+                  // ),
+                  // const SizedBox(
+                  //   height: 120,
+                  // ),
+                  // Container(
+                  //   color: Colors.white,
+                  //   // height: 350,
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       MediaQuery.of(context).size.width < 800
+                  //           ? Container()
+                  //           : Expanded(
+                  //               flex: 2,
+                  //               child: Image.asset(
+                  //                 "assets/images/abstract.gif",
+                  //                 fit: BoxFit.contain,
+                  //               )),
+                  //       const SizedBox(
+                  //         width: 30,
+                  //       ),
+                  //       const Expanded(
+                  //         flex: 4,
+                  //         child: Padding(
+                  //           padding: EdgeInsets.symmetric(vertical: 30),
+                  //           child: BodyTextMedium(
+                  //             text:
+                  //                 " 'Because we believe Africa’s greatest untapped resource is its people. Nigeria, in particular, has a vibrant, youthful population brimming with potential—but lacking access to global-standard training and the right opportunities. We’re closing that gap by equipping individuals with world-class tech skills and supporting entrepreneurs to build scalable, job-creating ventures."
+                  //                 " At the same time, we recognize that for African businesses to thrive in a fast-changing global economy, they must embrace digital transformation. That’s why we provide talent, training, and strategic support to help them evolve and compete."
+                  //                 "Our mission is not just to upskill individuals or deliver services—we’re building an ecosystem where talent meets opportunity, innovation drives growth, and the digital economy becomes a catalyst for inclusive prosperity across the continent.' ",
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       const SizedBox(
+                  //         width: 30,
+                  //       ),
+                  //       MediaQuery.of(context).size.width < 600
+                  //           ? Container()
+                  //           : Expanded(
+                  //               flex: 2,
+                  //               child: Image.asset("assets/images/lappy.jpg")),
+                  //     ],
+                  //   ),
+                  // ),
+                  // const SizedBox(
+                  //   height: 100,
+                  // ),
+
+
+                  ///HOW WE DO IT
+                   SizedBox(height: MediaQuery.of(context).size.width < 600 ? 60 : 200),
+                  const HowWeDoIt(),
+
+                  const SizedBox(height: 50,),
+
+
+
+
+
                   const SubHeadlineText(
                       text:
                           "Join a community of growing successful remote workers.\n"
@@ -396,12 +479,15 @@ class _HomePageState extends State<HomePage> {
                   MainButton(
                       title: "Learn More",
                       function: () {
-                        launchURLInNewTab('https://remobridgeapplication.vercel.app');
-                       // Get.toNamed('/learnMore');
+                        launchURLInNewTab(
+                            'https://remobridgeapplication.vercel.app');
+                        // Get.toNamed('/learnMore');
                       }),
                   const SizedBox(
                     height: 100,
                   ),
+
+
 
                   ///TESTIMONIALS AND CAROUSEL
                   const HeadlineText(text: "Testimonials"),

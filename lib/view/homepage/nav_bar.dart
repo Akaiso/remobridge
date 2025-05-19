@@ -1,25 +1,37 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:remobridge/utility/buttons.dart';
+import 'dart:html' as html;
 
 import '../../utility/text_styles.dart';
 
-class NavBar extends StatelessWidget {
+class NavBar extends StatefulWidget {
   final VoidCallback action;
   const NavBar({super.key, required this.action});
 
   @override
+  State<NavBar> createState() => _NavBarState();
+}
+
+class _NavBarState extends State<NavBar> {
+  void launchURLInNewTab(String url) {
+    html.window.open(url, '_blank');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 50),
+      padding: const EdgeInsets.only(left: 20, right: 20),
       child: SizedBox(
         height: 100,
         child: Row(
           children: [
             SizedBox(
                 width: MediaQuery.of(context).size.width < 600
-                    ? MediaQuery.of(context).size.width / 3
+                    ? MediaQuery.of(context).size.width / 2
                     : MediaQuery.of(context).size.width / 4,
-                child: Image.asset("assets/images/logo.png")),
+                child: Image.asset("assets/images/logo3.png")),
             const Spacer(),
             MediaQuery.of(context).size.width < 600
                 ? InkWell(
@@ -29,61 +41,74 @@ class NavBar extends StatelessWidget {
                       size: 30,
                     ),
                   )
-                : Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: InkWell(
-                            onTap: () {
-                              Get.toNamed('/aboutUs');
-                            },
-                            child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
+                : FittedBox(
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.redAccent,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: InkWell(
+                                onTap: () {
+                                  launchURLInNewTab(
+                                      'https://remobridgeapplication.vercel.app');
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                  child: NavText(
+                                      text: "Apply Here", color: Colors.white),
                                 ),
-                                decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const NavText(
-                                  text: "About Us",
-                                ))),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: InkWell(
-                            onTap: () {
-                              Get.toNamed('/contactUs');
-                            },
-                            child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const NavText(
-                                  text: "Contact Us",
-                                ))),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: InkWell(
-                            onTap: action,
-                            child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const NavText(
-                                  text: "Sponsors",
-                                ))),
-                      ),
-                    ],
+                              )
+
+                              // NavbarButtons(
+                              //   text: 'Apply Here',
+                              //   function: () {
+                              //     launchURLInNewTab(
+                              //         'https://remobridgeapplication.vercel.app');
+                              //   }, pageName: '',
+                              // ),
+                              ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: NavbarButtons(
+                            text: 'About Us',
+                            pageName: '/aboutUs',
+                            function: () {},
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: NavbarButtons(
+                            text: 'Contact Us',
+                            pageName: '/contactUs',
+                            function: () {},
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 0),
+                          child: InkWell(
+                              onTap: widget.action,
+                              child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1, color: Colors.redAccent),
+                                      color: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: const NavText(
+                                    text: "Sponsors", color: Colors.redAccent,
+
+                                    // color: Colors.red,
+                                  ))),
+                        )
+                      ],
+                    ),
                   )
           ],
         ),

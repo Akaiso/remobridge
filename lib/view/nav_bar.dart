@@ -1,9 +1,9 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:remobridge/utility/buttons.dart';
 import 'dart:html' as html;
 
+import 'package:flutter/material.dart';
+import 'package:remobridge/utility/buttons.dart';
+
+import '../utility/colors.dart';
 import '../utility/text_styles.dart';
 
 class NavBar extends StatefulWidget {
@@ -48,7 +48,7 @@ class _NavBarState extends State<NavBar> {
                           padding: const EdgeInsets.symmetric(horizontal: 4),
                           child: Container(
                               decoration: BoxDecoration(
-                                  color: Colors.redAccent,
+                                  color: MyColors.red,
                                   borderRadius: BorderRadius.circular(5)),
                               child: InkWell(
                                 onTap: () {
@@ -98,11 +98,11 @@ class _NavBarState extends State<NavBar> {
                                   ),
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          width: 1, color: Colors.redAccent),
+                                          width: 1, color: MyColors.red),
                                       color: Colors.transparent,
                                       borderRadius: BorderRadius.circular(5)),
-                                  child: const NavText(
-                                    text: "Sponsors", color: Colors.redAccent,
+                                  child: NavText(
+                                    text: "Sponsors", color: MyColors.red,
 
                                     // color: Colors.red,
                                   ))),

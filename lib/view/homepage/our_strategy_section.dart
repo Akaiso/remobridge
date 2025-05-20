@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:remobridge/utility/colors.dart';
 
 import '../../utility/text_styles.dart';
 
@@ -24,7 +25,7 @@ class OurStrategySection extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 30, top: 40, right: 30, bottom: 20),
                 decoration: BoxDecoration(
-                    color: Colors.redAccent,
+                    color: MyColors.red,
                     borderRadius: BorderRadius.circular(15)),
                 child: const Center(
                   child: WhiteLeftJustifiedBodyText(
@@ -53,7 +54,7 @@ class OurStrategySection extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 30, top: 40, right: 30, bottom: 20),
                 decoration: BoxDecoration(
-                    color: Colors.redAccent,
+                    color: MyColors.red,
                     borderRadius: BorderRadius.circular(15)),
                 child: const Center(
                   child: WhiteLeftJustifiedBodyText(
@@ -88,7 +89,7 @@ class OurStrategySection extends StatelessWidget {
                       right: 30,
                       bottom: 20),
                   decoration: BoxDecoration(
-                      color: Colors.redAccent,
+                      color: MyColors.red,
                       borderRadius:
                       BorderRadius.circular(20)),
                   child: const Center(
@@ -121,7 +122,7 @@ class OurStrategySection extends StatelessWidget {
                       right: 30,
                       bottom: 20),
                   decoration: BoxDecoration(
-                      color: Colors.redAccent,
+                      color: MyColors.red,
                       borderRadius:
                       BorderRadius.circular(20)),
                   child: const Center(

@@ -1,15 +1,19 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:remobridge/utility/buttons.dart';
+import 'package:remobridge/utility/colors.dart';
+import 'package:remobridge/view/animated_scroll_section.dart';
 import 'package:remobridge/view/footer.dart';
+import 'package:remobridge/view/homepage/first_section.dart';
 import 'package:remobridge/view/homepage/how_we_do_it.dart';
 import 'package:remobridge/view/homepage/our_strategy_section.dart';
 import 'package:remobridge/view/homepage/testimonial_section.dart';
 import 'package:remobridge/view/nav_bar.dart';
+import 'package:remobridge/view/subscribe_to_newsletter.dart';
 //import 'dart:html' as html;  //using url_launcher/url_launcher.dart instead
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../utility/text_styles.dart';
 
 class HomePage extends StatefulWidget {
@@ -48,7 +52,6 @@ class _HomePageState extends State<HomePage> {
   //   html.window.open(url, '_blank');
   // }
 
-
   void launchURLInNewTab(String url) async {
     final Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -60,7 +63,6 @@ class _HomePageState extends State<HomePage> {
       throw 'Could not launch $url';
     }
   }
-
 
   @override
   void dispose() {
@@ -82,7 +84,7 @@ class _HomePageState extends State<HomePage> {
           borderRadius: BorderRadius.circular(100),
         ),
         child: FloatingActionButton(
-          backgroundColor: const Color(0xfffdbc5a),
+          backgroundColor: MyColors.gold,
           onPressed: () {
             _scrollToTop();
           },
@@ -116,7 +118,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               height: 80,
-              color: Colors.redAccent,
+              color: MyColors.red,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -171,7 +173,7 @@ class _HomePageState extends State<HomePage> {
             const Spacer(),
             Text(
               "Remobridge.Africa",
-              style: GoogleFonts.poppins(fontSize: 10, color: Colors.redAccent),
+              style: GoogleFonts.poppins(fontSize: 10, color: MyColors.red),
             ),
             const SizedBox(
               height: 20,
@@ -200,108 +202,7 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     height: 50,
                   ),
-                  MediaQuery.of(context).size.width < 600
-                      ? Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal:
-                                      MediaQuery.of(context).size.width / 9),
-                              child: const Align(
-                                heightFactor: 0.5,
-                                alignment: Alignment.center,
-                                child: HeadlineText(
-                                    text: "Empowering Talents for "
-                                        "the Global Digital Economy \n"),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal:
-                                      MediaQuery.of(context).size.width / 9),
-                              child: const Align(
-                                alignment: Alignment.center,
-                                child: BodyText(
-                                    text:
-                                        "We empower individuals to become valuable in the global "
-                                        "digital economy and thrive as an employee or a business owner."
-                                        "Businesses also benefit from our pool of talents."),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            MainButton(
-                                title: "Learn more",
-                                function: () {
-                                  launchURLInNewTab(
-                                      'https://remobridgeapplication.vercel.app');
-                                  // Get.toNamed('/learnMore');
-                                }),
-                          ],
-                        )
-                      : SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 30),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(flex: 1,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(
-                                        //  width: 500,
-                                        child: Align(
-                                          heightFactor: 0.5,
-                                          alignment: Alignment.center,
-                                          child: HeadlineText(
-                                            text: "Empowering Talents for "
-                                                "the Global Digital Economy \n",
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      const Align(
-                                        alignment: Alignment.center,
-                                        child: BodyText(
-                                          text:
-                                              "We empower individuals to become valuable in the global "
-                                              "digital economy and thrive as an employee or a business owner."
-                                              "Businesses also benefit from our pool of talents.",
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      MainButton(
-                                          title: "Learn more",
-                                          function: () {
-                                            launchURLInNewTab(
-                                                'https://remobridgeapplication.vercel.app');
-                                            // Get.toNamed('/learnMore');
-                                          })
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 8,
-                                ),
-                                Expanded(flex: 2,
-                                  child: Image.asset(
-                                    "assets/images/worldGif.gif",
-                                    width: 500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                  const EmpoweringTalents(),
                   const SizedBox(
                     height: 120,
                   ),
@@ -319,43 +220,20 @@ class _HomePageState extends State<HomePage> {
                     height: 50,
                   ),
 
-                  Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal:
-                              MediaQuery.of(context).size.width < 600 ? 30 : 0),
-                      child: Column(
-                        children: [
-                          const SubHeadlineText(
-                              text:
-                                  "Become a Skilled Tech Talent without Prior Knowledge.\n"
-                                  "Let's help you take that first step - and every one after"),
-                          const Text(
-                            "Get the skills and experience you need to become a global techtalent and "
-                            "be a part of our thriving tech community and talent pool.",
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          MainButton(
-                              title: "Learn More",
-                              function: () {
-                                launchURLInNewTab(
-                                    'https://remobridgeapplication.vercel.app');
-                                // Get.toNamed('/learnMore');
-                              }),
-                          const SizedBox(
-                            height: 100,
-                          ),
-                        ],
-                      )),
-
-                  ///TESTIMONIALS AND CAROUSEL
-                  const HeadlineText(text: "Testimonials"),
+                  ///ANIMATED SCROLL SECTION 1
+                  const ScrollTriggeredAnimationSection(),
                   const SizedBox(
-                    height: 30,
+                    height: 120,
                   ),
-                  const TestimonialSection(),
+
+                  ///TESTIMONIALS
+                  const Column(
+                    children: [
+                      SizedBox(height: 80),
+                      FadingTestimonialSection(),
+                      SizedBox(height: 80),
+                    ],
+                  ),
 
                   ///sponsors section
                   Container(
@@ -383,6 +261,9 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 150,
                   ),
+
+                  ///SUBSCRIBE TO OUR NEWSLETTER SECTION
+                  const SubscribeToNewsletter(),
 
                   ///FAQs FREQUENTLY ASKED QUESTIONS
                   InkWell(

@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'colors.dart';
+
 class HeadlineText extends StatelessWidget {
   final String text ;
   final Color? color;
@@ -15,7 +17,7 @@ class HeadlineText extends StatelessWidget {
      // maxFontSize: 100,
       style: GoogleFonts.montserrat(
         fontWeight: FontWeight.w700,
-        color: color ?? const Color(0xff336666) ,
+        color: color ??  MyColors.teal ,
         fontSize: MediaQuery.of(context).size.width < 600 ? 25 :40,
       ),
     );
@@ -33,7 +35,7 @@ class SubHeadlineText extends StatelessWidget {
       text,minFontSize: 18,
       style: GoogleFonts.poppins(letterSpacing: 0,
         fontWeight: FontWeight.w600,
-        color: color ?? const Color(0xff336666),
+        color: color ?? MyColors.teal,
         fontSize: 25,
       ),
     );

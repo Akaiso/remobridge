@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../utility/colors.dart';
 import '../../utility/text_styles.dart';
 
 class HowWeDoIt extends StatefulWidget {
@@ -14,7 +15,7 @@ class HowWeDoIt extends StatefulWidget {
 class _HowWeDoItState extends State<HowWeDoIt> {
   List<Widget> howWeDoItBriefs = <Widget>[
     Container(
-      color: Colors.redAccent,
+      color: MyColors.red,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -113,7 +114,7 @@ class _HowWeDoItState extends State<HowWeDoIt> {
       ),
     ),
     Container(
-      color: Colors.redAccent,
+      color: MyColors.red,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -162,7 +163,7 @@ class _HowWeDoItState extends State<HowWeDoIt> {
 
   void ttColorChange() {
     setState(() {
-      ttColor = Colors.redAccent;
+      ttColor = MyColors.red;
       tpColor = Colors.black45;
       piColor = Colors.black45;
       vbColor = Colors.black45;
@@ -198,7 +199,7 @@ class _HowWeDoItState extends State<HowWeDoIt> {
       ttColor = Colors.black45;
       tpColor = Colors.black45;
       piColor = Colors.black45;
-      vbColor = Colors.redAccent;
+      vbColor = MyColors.red;
       howWeDoItImage = "assets/images/vb_image.png";
       brief = howWeDoItBriefs[3];
     });
@@ -210,7 +211,7 @@ class _HowWeDoItState extends State<HowWeDoIt> {
     super.initState();
     howWeDoItImage = "assets/images/tt_image.jpg";
     brief = howWeDoItBriefs[0];
-    ttColor = Colors.red;
+    ttColor = MyColors.red;
     tpColor = Colors.black45;
     piColor = Colors.black45;
     vbColor = Colors.black45;
@@ -251,14 +252,14 @@ class _HowWeDoItState extends State<HowWeDoIt> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Row(
+                      Row(
                         children: [
-                          SubHeadlineText(text: "How"),
+                          const SubHeadlineText(text: "How"),
                           SubHeadlineText(
                             text: "We",
-                            color: Colors.redAccent,
+                            color: MyColors.red,
                           ),
-                          SubHeadlineText(text: "Do It")
+                          const SubHeadlineText(text: "Do It")
                         ],
                       ),
                       howWeDoItMobile(
@@ -317,16 +318,16 @@ class _HowWeDoItState extends State<HowWeDoIt> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ///HOW WE DO IT TEXT
-                          const SizedBox(
+                          SizedBox(
                             width: 200,
                             child: Row(
                               children: [
-                                SubHeadlineText(text: "How"),
+                                const SubHeadlineText(text: "How"),
                                 SubHeadlineText(
                                   text: "We",
-                                  color: Colors.redAccent,
+                                  color: MyColors.red,
                                 ),
-                                SubHeadlineText(text: "Do It")
+                                const SubHeadlineText(text: "Do It")
                               ],
                             ),
                           ),

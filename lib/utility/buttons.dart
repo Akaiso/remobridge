@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:remobridge/utility/text_styles.dart';
 
+import 'colors.dart';
+
 class MainButton extends StatelessWidget {
   final String title;
   final VoidCallback? function;
@@ -15,9 +17,9 @@ class MainButton extends StatelessWidget {
       onTap: function,
       child: Container(
           width: 200,
-          height: 38,
+          height: 45,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5), color: Colors.redAccent),
+              borderRadius: BorderRadius.circular(5), color: MyColors.red),
           child: Center(
             child: Text(
               title,
@@ -96,7 +98,7 @@ class _NavbarButtonsState extends State<NavbarButtons> {
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(10)),
               child: NavText(
-                color:  changeAboutUsColor ? Colors.redAccent : Colors.black45,
+                color:  changeAboutUsColor ? MyColors.red : Colors.black45,
                 text: widget.text!,
               ))),
     );

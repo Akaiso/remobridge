@@ -39,11 +39,12 @@ class _EmpoweringTalentsState extends State<EmpoweringTalents> {
         Padding(
           padding: EdgeInsets.symmetric(
               horizontal:
-              MediaQuery.of(context).size.width / 9),
+              MediaQuery.of(context).size.width / 9, ),
           child: const Align(
             heightFactor: 0.5,
             alignment: Alignment.center,
             child: HeadlineText(
+              maxLines: 3,
                 text: "Empowering Talents for "
                     "the Global Digital Economy \n"),
           ),
@@ -93,13 +94,14 @@ class _EmpoweringTalentsState extends State<EmpoweringTalents> {
                       heightFactor: 0.5,
                       alignment: Alignment.center,
                       child: HeadlineText(
+                        maxLines: 3,
                         text: "Empowering Talents for "
                             "the Global Digital Economy \n",
                       ),
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 40,
                   ),
                   const Align(
                     alignment: Alignment.center,

@@ -30,6 +30,7 @@ class _SubscribeToNewsletterState extends State<SubscribeToNewsletter> {
           child: Column(
             children: [
               HeadlineText(
+                maxLines: 1,
                 text: "Stay Informed.Stay Ahead",
                 color: MyColors.red,
               ),

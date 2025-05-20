@@ -8,12 +8,13 @@ import 'colors.dart';
 class HeadlineText extends StatelessWidget {
   final String text ;
   final Color? color;
-    const HeadlineText({super.key, required this.text, this.color });
+  final int? maxLines;
+    const HeadlineText({super.key, required this.text, this.color , this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.left,
-      text,minFontSize: 20,
+      text,minFontSize: 20,maxLines: maxLines,
      // maxFontSize: 100,
       style: GoogleFonts.montserrat(
         fontWeight: FontWeight.w700,
@@ -27,12 +28,14 @@ class HeadlineText extends StatelessWidget {
 class SubHeadlineText extends StatelessWidget {
   final String text ;
   final Color? color;
-  const SubHeadlineText({super.key, required this.text, this.color });
+  final int? maxLines;
+  const SubHeadlineText({super.key, required this.text, this.color, this.maxLines });
 
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.left,
       text,minFontSize: 18,
+      maxLines: maxLines,
       style: GoogleFonts.poppins(letterSpacing: 0,
         fontWeight: FontWeight.w600,
         color: color ?? MyColors.teal,

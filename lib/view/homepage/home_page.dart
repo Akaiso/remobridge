@@ -243,11 +243,15 @@ class _HomePageState extends State<HomePage> {
                     height: 30,
                   ),
                   const SizedBox(
-                    height: 100,
                     // width: MediaQuery.of(context).size.width,
-                    child: SubHeadlineText(
-                        text:
-                            '"We are currently seeking sponsors to support our mission of empowering remote workers. \nIf you’re interested in partnering with us, please contact us."'),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: SubHeadlineText(
+                        maxLines: 4,
+                          text:
+                              '"We are currently seeking sponsors to support our mission of empowering remote workers. \n'
+                              'If you’re interested in partnering with us, please contact us."'),
+                    ),
                   ),
                   const SizedBox(
                     height: 30,

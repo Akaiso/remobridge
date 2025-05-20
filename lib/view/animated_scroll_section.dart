@@ -127,6 +127,7 @@ class _ScrollTriggeredAnimationSectionState
                   FadeTransition(
                     opacity: _text1Opacity,
                     child: const HeadlineText(
+                      maxLines: 4,
                         text: "Become a Skilled Tech Talent \n"
                             "without Prior Knowledge.\n"
                             "Let's help you take that \n"

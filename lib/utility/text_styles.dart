@@ -87,11 +87,11 @@ class BodyTextMedium extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.left,
-      text,minFontSize: 20,
-      maxFontSize: 25,
+      text,minFontSize: 18,
+      maxFontSize: 18,
       style: GoogleFonts.montserrat(
-        fontWeight: FontWeight.w500,
-        // color: Colors.black,
+        fontWeight: FontWeight.w700,
+         color: MyColors.teal,
 
       ),
     );

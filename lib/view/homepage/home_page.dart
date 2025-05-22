@@ -247,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: SubHeadlineText(
-                        maxLines: 4,
+                          maxLines: 4,
                           text:
                               '"We are currently seeking sponsors to support our mission of empowering remote workers. \n'
                               'If you’re interested in partnering with us, please contact us."'),
@@ -269,22 +269,286 @@ class _HomePageState extends State<HomePage> {
                   ///SUBSCRIBE TO OUR NEWSLETTER SECTION
                   const SubscribeToNewsletter(),
 
+                  const SizedBox(
+                    height: 150,
+                  ),
+
+                  ///BOTTOM LINKS
+                 MediaQuery.of(context).size.width < 700? Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     BottomLinks(
+                       headerText: "For Businesses",
+                       text1: "Talent Outsourcing",
+                       text2: "Corporate Training",
+                       text3: "Project Implementation",
+                       text4: "Project Advisory",
+                       onTap1: () {},
+                       onTap2: () {},
+                       onTap3: () {},
+                       onTap4: () {},
+                     ),
+                     const SizedBox(height: 40,),
+                     BottomLinks(
+                         headerText: "For Individuals",
+                         text1: "Techpreneurship Program",
+                         text2: "Data Analytics Program",
+                         onTap1: () {},
+                         onTap2: () {}),
+                     BottomLinks(
+                         headerText: "About Us",
+                         text1: "Careers",
+                         text2: "Stories",
+                         onTap1: () {},
+                         onTap2: () {}),
+                     BottomLinks(
+                         headerText: "Contact Us",
+                         text1: "14 Yalinga Crescent , Wuse2 , Abuja, FCT",
+                         text2: "+2348138442423",
+                         text3: "remobridge@outlook.com",
+                         onTap1: () {},
+                         onTap2: () {},
+                         onTap3: (){}),
+                   ],
+                 ) : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                        child: BottomLinks(
+                          headerText: "For Businesses",
+                          text1: "Talent Outsourcing",
+                          text2: "Corporate Training",
+                          text3: "Project Implementation",
+                          text4: "Project Advisory",
+                          onTap1: () {},
+                          onTap2: () {},
+                          onTap3: () {},
+                          onTap4: () {},
+                        ),
+                      ),
+                      Expanded(
+                        child: BottomLinks(
+                            headerText: "For Individuals",
+                            text1: "Techpreneurship Program",
+                            text2: "Data Analytics Program",
+                            onTap1: () {},
+                            onTap2: () {}),
+                      ),
+                      Expanded(
+                        child: BottomLinks(
+                            headerText: "About Us",
+                            text1: "Careers",
+                            text2: "Stories",
+                            onTap1: () {},
+                            onTap2: () {}),
+                      ),
+                      Expanded (
+                        child: BottomLinks(
+                            headerText: "Contact Us",
+                            text1: "14 Yalinga Street, off Adetokunbo Ademola Crescent, Wuse 2 , Abuja 900288, Federal Capital Territory",
+                            text2: "+2348138442423",
+                            text3: "remobridge@outlook.com",
+                            onTap1: () {},
+                            onTap2: () {},
+                        onTap3: (){}),
+                      ),
+                    ],
+                  ),
+
+                 const SizedBox(height: 40,),
+
+                  ///SOCIAL MEDIA HANDLES
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30),
+                    child: Socials(),
+                  ),
+
                   ///FAQs FREQUENTLY ASKED QUESTIONS
-                  InkWell(
-                      onTap: () {
-                        Get.toNamed('/faq');
-                      },
-                      child: const HeadlineText(text: "FAQs >>>")),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              Get.toNamed('/faq');
+                            },
+                            child: const SubHeadlineText(text: "FAQs >>>")),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
             const SizedBox(
               height: 100,
             ),
-            const Footer()
+
+            const Align(alignment: Alignment.center,  child: Text("copyright 2025 ",)),
+            ///OBSOLETE FOOTER
+           // const Footer()
           ],
         ),
       ),
     ));
+  }
+}
+
+class BottomLinks extends StatefulWidget {
+  final String headerText;
+  final String text1;
+  final String text2;
+  final String? text3;
+  final String? text4;
+  final VoidCallback onTap1;
+  final VoidCallback onTap2;
+  final VoidCallback? onTap3;
+  final VoidCallback? onTap4;
+  const BottomLinks(
+      {super.key,
+      required this.headerText,
+      required this.text1,
+      required this.text2,
+      this.text3,
+      this.text4,
+      required this.onTap1,
+      required this.onTap2,
+      this.onTap3,
+      this.onTap4});
+
+  @override
+  State<BottomLinks> createState() => _BottomLinksState();
+}
+
+class _BottomLinksState extends State<BottomLinks> {
+  Color color1 = Colors.black;
+  Color color2 = Colors.black;
+  Color color3 = Colors.black;
+  Color color4 = Colors.black;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        BodyTextMedium(
+          text: widget.headerText,
+         // color: MyColors.teal,
+        ),
+        MouseRegion(
+          onHover: (_) {
+            setState(() {
+              color1 = MyColors.red;
+            });
+          },
+          onExit: (_) {
+            setState(() {
+              color1 = Colors.black;
+            });
+          },
+          child: InkWell(
+            hoverColor: Colors.transparent,
+            onTap: widget.onTap1,
+            child: Text(
+              widget.text1,
+              style: TextStyle(color: color1),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        MouseRegion(
+          onEnter: (_) {
+            setState(() {
+              color2 = MyColors.red;
+            });
+          },
+          onExit: (_) {
+            setState(() {
+              color2 = Colors.black;
+            });
+          },
+          child: InkWell(
+            hoverColor: Colors.transparent,
+            onTap: widget.onTap2,
+            child: Text(
+              widget.text2,
+              style: TextStyle(color: color2),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        MouseRegion(
+          onEnter: (_) {
+            setState(() {
+              color3 = MyColors.red;
+            });
+          },
+          onExit: (_) {
+            setState(() {
+              color3 = Colors.black;
+            });
+          },
+          child: InkWell(
+            hoverColor: Colors.transparent,
+            onTap: widget.onTap3,
+            child: Text(
+              widget.text3 ?? "",
+              style: TextStyle(color: color3),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        MouseRegion(
+          onEnter: (_) {
+            setState(() {
+              color4 = MyColors.red;
+            });
+          },
+          onExit: (_) {
+            setState(() {
+              color4 = Colors.black;
+            });
+          },
+          child: InkWell(
+            hoverColor: Colors.transparent,
+            onTap: widget.onTap4,
+            child: Text(
+              widget.text4 ?? "",
+              style: TextStyle(color: color4),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
+class Socials extends StatelessWidget {
+  const Socials({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const BodyTextMedium(text: "Follow Us"),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            IconButton(onPressed: (){}, icon:   Icon(Icons.facebook, color: MyColors.teal,), ),
+            IconButton(onPressed: (){}, icon:   Icon(Icons.tiktok, color: MyColors.teal), ),
+            IconButton(onPressed: (){}, icon:   Icon(Icons.linked_camera_outlined, color: MyColors.teal), )
+          ],
+        )
+      ],
+    );
   }
 }

@@ -126,8 +126,13 @@ class _ScrollTriggeredAnimationSectionState
                   ///FADE IN TRANSITION OF TEXT
                   FadeTransition(
                     opacity: _text1Opacity,
-                    child: const HeadlineText(
+                    child: MediaQuery.of(context).size.width < 600 ? const HeadlineText(
                       maxLines: 4,
+                        text: "Become a Skilled Tech Talent "
+                            "without Prior Knowledge."
+                            "Let's help you take that "
+                            "first step - and every one after") : const HeadlineText(
+                        maxLines: 4,
                         text: "Become a Skilled Tech Talent \n"
                             "without Prior Knowledge.\n"
                             "Let's help you take that \n"
@@ -138,7 +143,7 @@ class _ScrollTriggeredAnimationSectionState
                     position: _text2Offset,
                     child:  Text(
                       "Get the skills and experience you need to \n"
-                      "become a global techtalent and \n"
+                      "become a global tech talent and \n"
                       "be a part of our thriving tech community and talent pool.",
                       textAlign: MediaQuery.of(context).size.width < 600 ? TextAlign.center : TextAlign.start,
                     ),

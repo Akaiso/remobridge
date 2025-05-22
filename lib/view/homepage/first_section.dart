@@ -49,6 +49,7 @@ class _EmpoweringTalentsState extends State<EmpoweringTalents> {
                     "the Global Digital Economy \n"),
           ),
         ),
+        const SizedBox(height: 20,),
         Padding(
           padding: EdgeInsets.symmetric(
               horizontal:

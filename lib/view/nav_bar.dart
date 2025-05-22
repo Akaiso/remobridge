@@ -31,7 +31,7 @@ class _NavBarState extends State<NavBar> {
                 width: MediaQuery.of(context).size.width < 600
                     ? MediaQuery.of(context).size.width / 2
                     : MediaQuery.of(context).size.width / 4,
-                child: Image.asset("assets/images/logo3.png")),
+                child: Image.asset("assets/images/logo_new.png")),
             const Spacer(),
             MediaQuery.of(context).size.width < 600
                 ? InkWell(

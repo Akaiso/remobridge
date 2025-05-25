@@ -64,16 +64,37 @@ class WhiteSubHeadlineText extends StatelessWidget {
 
 class BodyText extends StatelessWidget {
   final String text ;
-  const BodyText({super.key, required this.text });
+  final Color? color;
+  final TextAlign? align;
+  const BodyText({super.key, required this.text, this.color, this.align });
 
   @override
   Widget build(BuildContext context) {
-    return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.left,
+    return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : align,
       text,minFontSize: 8,
       maxFontSize: 15,
       style: GoogleFonts.montserrat(
         fontWeight: FontWeight.w500,
-       // color: Colors.black,
+        color: color,
+
+      ),
+    );
+  }
+}
+
+class BodyTextAboutUsTop extends StatelessWidget {
+  final String text ;
+  final Color? color;
+  const BodyTextAboutUsTop({super.key, required this.text, this.color });
+
+  @override
+  Widget build(BuildContext context) {
+    return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.center,
+      text,minFontSize: 8,
+      maxFontSize: 15,
+      style: GoogleFonts.montserrat(
+        fontWeight: FontWeight.w500,
+        color: color,
 
       ),
     );
@@ -82,7 +103,8 @@ class BodyText extends StatelessWidget {
 
 class BodyTextMedium extends StatelessWidget {
   final String text ;
-  const BodyTextMedium({super.key, required this.text });
+  final Color? color;
+  const BodyTextMedium({super.key, required this.text , this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +113,7 @@ class BodyTextMedium extends StatelessWidget {
       maxFontSize: 18,
       style: GoogleFonts.montserrat(
         fontWeight: FontWeight.w700,
-         color: MyColors.teal,
+         color: color,
 
       ),
     );

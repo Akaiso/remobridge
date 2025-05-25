@@ -86,9 +86,7 @@ class _NavbarButtonsState extends State<NavbarButtons> {
         });
       },
       child: InkWell(
-          onTap: () {
-            Get.toNamed(widget.pageName);
-          },
+          onTap: widget.function,
           child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,

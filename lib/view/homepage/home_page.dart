@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:remobridge/utility/buttons.dart';
 import 'package:remobridge/utility/colors.dart';
+import 'package:remobridge/view/about_us/about_us.dart';
 import 'package:remobridge/view/animated_scroll_section.dart';
-import 'package:remobridge/view/footer.dart';
 import 'package:remobridge/view/homepage/first_section.dart';
 import 'package:remobridge/view/homepage/how_we_do_it.dart';
 import 'package:remobridge/view/homepage/our_strategy_section.dart';
 import 'package:remobridge/view/homepage/testimonial_section.dart';
 import 'package:remobridge/view/nav_bar.dart';
 import 'package:remobridge/view/subscribe_to_newsletter.dart';
+import 'package:remobridge/view/websiteBody.dart';
 //import 'dart:html' as html;  //using url_launcher/url_launcher.dart instead
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,6 +25,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+
+  ///VISIBILITY OF ABOUTUS PABE
+  bool isHomePageVisible = true;
+
+  ///scroll to sponsors and top of page variables and functions
   final ScrollController _scrollController = ScrollController();
   final ScrollController toTopScrollController = ScrollController();
   final GlobalKey _section2Key = GlobalKey();
@@ -64,6 +71,17 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    isHomePageVisible = true;
+   // body = const AboutUsPage();
+    super.initState();
+  }
+
+
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -73,7 +91,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return
+      SafeArea(
         child: Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: Container(
@@ -184,210 +203,227 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         toolbarHeight: 100,
-        title: NavBar(action: () {
+        title: NavBar(sponsorFunction: () {
           _scrollToSection(_section2Key);
-        }),
+        }, aboutUsFunction: () {
+          setState(() {
+            isHomePageVisible = false;
+          });
+          }, contactUsFunction: () {  },
+        homePageVisibility: (){
+          Get.offAllNamed("/");
+          setState(() {
+            isHomePageVisible = true;
+          });
+          },),
         actions: [Container()],
       ),
+
+      ///BODY OF PAGE
       body: SingleChildScrollView(
         controller: _scrollController,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(
-                  MediaQuery.of(context).size.width < 600 ? 0 : 30),
-              child: Column(
-                children: [
-                  Container(
-                    height: 50,
-                  ),
-                  const EmpoweringTalents(),
-                  const SizedBox(
-                    height: 120,
-                  ),
+        child: Padding(
+          padding: MediaQuery.of(context).size.width < 600? const EdgeInsets.all(0) : const EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Visibility(replacement:   AboutUsPage(sponsorKey: _section2Key,),
+                visible: isHomePageVisible,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 80,
+                      ),
+                      const EmpoweringTalents(),
+                      const SizedBox(
+                        height: 120,
+                      ),
 
-                  ///OUR STRATEBY SECTION
-                  const OurStrategySection(),
+                      ///OUR STRATEBY SECTION
+                      const OurStrategySection(),
 
-                  ///HOW WE DO IT SECTION
-                  SizedBox(
-                      height:
+                      ///HOW WE DO IT SECTION
+                      SizedBox(
+                          height:
                           MediaQuery.of(context).size.width < 600 ? 60 : 200),
-                  const HowWeDoIt(),
+                      const HowWeDoIt(),
 
-                  const SizedBox(
-                    height: 50,
-                  ),
+                      const SizedBox(
+                        height: 50,
+                      ),
 
-                  ///ANIMATED SCROLL SECTION 1
-                  const ScrollTriggeredAnimationSection(),
-                  const SizedBox(
-                    height: 120,
-                  ),
+                      ///ANIMATED SCROLL SECTION 1
+                      const ScrollTriggeredAnimationSection(),
+                      const SizedBox(
+                        height: 120,
+                      ),
 
-                  ///TESTIMONIALS
-                  const Column(
-                    children: [
-                      SizedBox(height: 80),
-                      FadingTestimonialSection(),
-                      SizedBox(height: 80),
-                    ],
-                  ),
+                      ///TESTIMONIALS
+                      const Column(
+                        children: [
+                          SizedBox(height: 80),
+                          FadingTestimonialSection(),
+                          SizedBox(height: 80),
+                        ],
+                      ),
 
-                  ///sponsors section
-                  Container(
-                      key: _section2Key,
-                      child: const HeadlineText(text: "Sponsors")),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const SizedBox(
-                    // width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: SubHeadlineText(
-                          maxLines: 4,
-                          text:
+                      ///sponsors section
+                      Container(
+                          key: _section2Key,
+                          child: const HeadlineText(text: "Sponsors")),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const SizedBox(
+                        // width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: SubHeadlineText(
+                              maxLines: 4,
+                              text:
                               '"We are currently seeking sponsors to support our mission of empowering remote workers. \n'
-                              'If you’re interested in partnering with us, please contact us."'),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  MainButton(
-                      title: "Contact Us",
-                      function: () {
-                        Get.toNamed('/contactUs');
-                      }),
-
-                  const SizedBox(
-                    height: 150,
-                  ),
-
-                  ///SUBSCRIBE TO OUR NEWSLETTER SECTION
-                  const SubscribeToNewsletter(),
-
-                  const SizedBox(
-                    height: 150,
-                  ),
-
-                  ///BOTTOM LINKS
-                 MediaQuery.of(context).size.width < 700? Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     BottomLinks(
-                       headerText: "For Businesses",
-                       text1: "Talent Outsourcing",
-                       text2: "Corporate Training",
-                       text3: "Project Implementation",
-                       text4: "Project Advisory",
-                       onTap1: () {},
-                       onTap2: () {},
-                       onTap3: () {},
-                       onTap4: () {},
-                     ),
-                     const SizedBox(height: 40,),
-                     BottomLinks(
-                         headerText: "For Individuals",
-                         text1: "Techpreneurship Program",
-                         text2: "Data Analytics Program",
-                         onTap1: () {},
-                         onTap2: () {}),
-                     BottomLinks(
-                         headerText: "About Us",
-                         text1: "Careers",
-                         text2: "Stories",
-                         onTap1: () {},
-                         onTap2: () {}),
-                     BottomLinks(
-                         headerText: "Contact Us",
-                         text1: "14 Yalinga Crescent , Wuse2 , Abuja, FCT",
-                         text2: "+2348138442423",
-                         text3: "remobridge@outlook.com",
-                         onTap1: () {},
-                         onTap2: () {},
-                         onTap3: (){}),
-                   ],
-                 ) : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Expanded(
-                        child: BottomLinks(
-                          headerText: "For Businesses",
-                          text1: "Talent Outsourcing",
-                          text2: "Corporate Training",
-                          text3: "Project Implementation",
-                          text4: "Project Advisory",
-                          onTap1: () {},
-                          onTap2: () {},
-                          onTap3: () {},
-                          onTap4: () {},
+                                  'If you’re interested in partnering with us, please contact us."'),
                         ),
                       ),
-                      Expanded(
-                        child: BottomLinks(
-                            headerText: "For Individuals",
-                            text1: "Techpreneurship Program",
-                            text2: "Data Analytics Program",
-                            onTap1: () {},
-                            onTap2: () {}),
+                      const SizedBox(
+                        height: 30,
                       ),
-                      Expanded(
-                        child: BottomLinks(
-                            headerText: "About Us",
-                            text1: "Careers",
-                            text2: "Stories",
-                            onTap1: () {},
-                            onTap2: () {}),
+                      MainButton(
+                          title: "Contact Us",
+                          function: () {
+                            Get.toNamed('/contactUs');
+                          }),
+
+                      const SizedBox(
+                        height: 150,
                       ),
-                      Expanded (
-                        child: BottomLinks(
-                            headerText: "Contact Us",
-                            text1: "14 Yalinga Street, off Adetokunbo Ademola Crescent, Wuse 2 , Abuja 900288, Federal Capital Territory",
-                            text2: "+2348138442423",
-                            text3: "remobridge@outlook.com",
+
+                      ///SUBSCRIBE TO OUR NEWSLETTER SECTION
+                      const SubscribeToNewsletter(),
+
+                      const SizedBox(
+                        height: 150,
+                      ),
+
+                      ///BOTTOM LINKS
+                      MediaQuery.of(context).size.width < 700? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          BottomLinks(
+                            headerText: "For Businesses",
+                            text1: "Talent Outsourcing",
+                            text2: "Corporate Training",
+                            text3: "Project Implementation",
+                            text4: "Project Advisory",
                             onTap1: () {},
                             onTap2: () {},
-                        onTap3: (){}),
+                            onTap3: () {},
+                            onTap4: () {},
+                          ),
+                          const SizedBox(height: 40,),
+                          BottomLinks(
+                              headerText: "For Individuals",
+                              text1: "Techpreneurship Program",
+                              text2: "Data Analytics Program",
+                              onTap1: () {},
+                              onTap2: () {}),
+                          BottomLinks(
+                              headerText: "About Us",
+                              text1: "Careers",
+                              text2: "Stories",
+                              onTap1: () {},
+                              onTap2: () {}),
+                          BottomLinks(
+                              headerText: "Contact Us",
+                              text1: "14 Yalinga Crescent , Wuse2 , Abuja, FCT",
+                              text2: "+2348138442423",
+                              text3: "remobridge@outlook.com",
+                              onTap1: () {},
+                              onTap2: () {},
+                              onTap3: (){}),
+                        ],
+                      ) : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              child: BottomLinks(
+                                headerText: "For Businesses",
+                                text1: "Talent Outsourcing",
+                                text2: "Corporate Training",
+                                text3: "Project Implementation",
+                                text4: "Project Advisory",
+                                onTap1: () {},
+                                onTap2: () {},
+                                onTap3: () {},
+                                onTap4: () {},
+                              ),
+                            ),
+                            Expanded(
+                              child: BottomLinks(
+                                  headerText: "For Individuals",
+                                  text1: "Techpreneurship Program",
+                                  text2: "Data Analytics Program",
+                                  onTap1: () {},
+                                  onTap2: () {}),
+                            ),
+                            Expanded(
+                              child: BottomLinks(
+                                  headerText: "About Us",
+                                  text1: "Careers",
+                                  text2: "Stories",
+                                  onTap1: () {},
+                                  onTap2: () {}),
+                            ),
+                            Expanded (
+                              child: BottomLinks(
+                                  headerText: "Contact Us",
+                                  text1: "14 Yalinga Street, off Adetokunbo Ademola Crescent, Wuse 2 , Abuja 900288, Federal Capital Territory",
+                                  text2: "+2348138442423",
+                                  text3: "remobridge@outlook.com",
+                                  onTap1: () {},
+                                  onTap2: () {},
+                                  onTap3: (){}),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(height: 40,),
+
+                      ///SOCIAL MEDIA HANDLES
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        child: Socials(),
+                      ),
+
+                      ///FAQs FREQUENTLY ASKED QUESTIONS
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                                onTap: () {
+                                  Get.toNamed('/faq');
+                                },
+                                child: const SubHeadlineText(text: "FAQs >>>")),
+                          ],
+                        ),
                       ),
                     ],
-                  ),
-
-                 const SizedBox(height: 40,),
-
-                  ///SOCIAL MEDIA HANDLES
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: Socials(),
-                  ),
-
-                  ///FAQs FREQUENTLY ASKED QUESTIONS
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
-                            onTap: () {
-                              Get.toNamed('/faq');
-                            },
-                            child: const SubHeadlineText(text: "FAQs >>>")),
-                      ],
-                    ),
-                  ),
-                ],
+                  )
               ),
-            ),
-            const SizedBox(
-              height: 100,
-            ),
+              const SizedBox(
+                height: 100,
+              ),
 
-            const Align(alignment: Alignment.center,  child: Text("copyright 2025 ",)),
-            ///OBSOLETE FOOTER
-           // const Footer()
-          ],
+              const Align(alignment: Alignment.center,  child: Text("copyright 2025 ",)),
+              ///OBSOLETE FOOTER
+             // const Footer()
+            ],
+          ),
         ),
       ),
     ));
@@ -552,3 +588,179 @@ class Socials extends StatelessWidget {
     );
   }
 }
+
+
+
+// Widget aboutUs (BuildContext context){
+//   return
+//
+//     Column(
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       Container(
+//         width: MediaQuery.of(context).size.width ,
+//         decoration: const BoxDecoration(
+//           color: Colors.blue,
+//             image: DecorationImage(
+//               fit: BoxFit.cover,
+//                 image:
+//                 AssetImage("assets/images/abtus_bg_img.jpg",))),
+//         height: MediaQuery.of(context).size.height / 1.5,
+//         child: const Center(
+//             child: Text(
+//               'THIS IS THE ABOUT US PAGE',
+//               style: TextStyle(fontSize: 10, color: Colors.white),
+//             )),
+//       ),
+//       const Text(
+//         'THIS IS THE ABOUT US PAGE',
+//         style: TextStyle(fontSize: 10, color: Colors.black),
+//       ),
+//       // const EmpoweringTalents(),
+//       const SizedBox(
+//         height: 120,
+//       ),
+//
+//       ///sponsors section
+//       // Container(
+//       //     key: sponsorKey,
+//       //     child: const HeadlineText(text: "Sponsors")),
+//       const SizedBox(
+//         height: 30,
+//       ),
+//       const SizedBox(
+//         // width: MediaQuery.of(context).size.width,
+//         child: Padding(
+//           padding: EdgeInsets.symmetric(horizontal: 20),
+//           child: SubHeadlineText(
+//               maxLines: 4,
+//               text:
+//               '"We are currently seeking sponsors to support our mission of empowering remote workers. \n'
+//                   'If you’re interested in partnering with us, please contact us."'),
+//         ),
+//       ),
+//       const SizedBox(
+//         height: 30,
+//       ),
+//       MainButton(
+//           title: "Contact Us",
+//           function: () {
+//             Get.toNamed('/contactUs');
+//           }),
+//
+//       ///SUBSCRIBE TO OUR NEWSLETTER SECTION
+//       const SubscribeToNewsletter(),
+//
+//       const SizedBox(
+//         height: 150,
+//       ),
+//
+//       ///BOTTOM LINKS
+//       MediaQuery.of(context).size.width < 700
+//           ? Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           BottomLinks(
+//             headerText: "For Businesses",
+//             text1: "Talent Outsourcing",
+//             text2: "Corporate Training",
+//             text3: "Project Implementation",
+//             text4: "Project Advisory",
+//             onTap1: () {},
+//             onTap2: () {},
+//             onTap3: () {},
+//             onTap4: () {},
+//           ),
+//           const SizedBox(
+//             height: 40,
+//           ),
+//           BottomLinks(
+//               headerText: "For Individuals",
+//               text1: "Techpreneurship Program",
+//               text2: "Data Analytics Program",
+//               onTap1: () {},
+//               onTap2: () {}),
+//           BottomLinks(
+//               headerText: "About Us",
+//               text1: "Careers",
+//               text2: "Stories",
+//               onTap1: () {},
+//               onTap2: () {}),
+//           BottomLinks(
+//               headerText: "Contact Us",
+//               text1:
+//               "14 Yalinga Crescent , Wuse2 , Abuja, FCT",
+//               text2: "+2348138442423",
+//               text3: "remobridge@outlook.com",
+//               onTap1: () {},
+//               onTap2: () {},
+//               onTap3: () {}),
+//         ],
+//       )
+//           : Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceAround,
+//         children: [
+//           Expanded(
+//             child: BottomLinks(
+//               headerText: "For Businesses",
+//               text1: "Talent Outsourcing",
+//               text2: "Corporate Training",
+//               text3: "Project Implementation",
+//               text4: "Project Advisory",
+//               onTap1: () {},
+//               onTap2: () {},
+//               onTap3: () {},
+//               onTap4: () {},
+//             ),
+//           ),
+//           Expanded(
+//             child: BottomLinks(
+//                 headerText: "For Individuals",
+//                 text1: "Techpreneurship Program",
+//                 text2: "Data Analytics Program",
+//                 onTap1: () {},
+//                 onTap2: () {}),
+//           ),
+//           Expanded(
+//             child: BottomLinks(
+//                 headerText: "About Us",
+//                 text1: "Careers",
+//                 text2: "Stories",
+//                 onTap1: () {},
+//                 onTap2: () {}),
+//           ),
+//           Expanded(
+//             child: BottomLinks(
+//                 headerText: "Contact Us",
+//                 text1:
+//                 "14 Yalinga Street, off Adetokunbo Ademola Crescent, Wuse 2 , Abuja 900288, Federal Capital Territory",
+//                 text2: "+2348138442423",
+//                 text3: "remobridge@outlook.com",
+//                 onTap1: () {},
+//                 onTap2: () {},
+//                 onTap3: () {}),
+//           ),
+//         ],
+//       ),
+//
+//       const SizedBox(
+//         height: 40,
+//       ),
+//
+//       ///SOCIAL MEDIA HANDLES
+//       const Padding(
+//         padding: EdgeInsets.symmetric(horizontal: 30),
+//         child: Socials(),
+//       ),
+//       const SizedBox(
+//         height: 100,
+//       ),
+//
+//       const Align(
+//           alignment: Alignment.center,
+//           child: Text(
+//             "copyright 2025 ",
+//           ))
+//     ],
+//   );
+// }

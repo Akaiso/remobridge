@@ -1,6 +1,9 @@
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_common/get_reset.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:remobridge/utility/buttons.dart';
 
 import '../utility/colors.dart';
@@ -64,7 +67,7 @@ class _NavBarState extends State<NavBar> {
                                 child: const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                   child: NavText(
-                                      text: "Apply Here", color: Colors.white),
+                                      text: "Individual", color: Colors.white, letterSpacing: 1,),
                                 ),
                               )
 
@@ -91,7 +94,9 @@ class _NavBarState extends State<NavBar> {
                           child: NavbarButtons(
                             text: 'Contact Us',
                             pageName: '/contactUs',
-                            function: () {},
+                            function: () {
+                              Get.offAllNamed("/contactUs");
+                            },
                           ),
                         ),
                         Padding(

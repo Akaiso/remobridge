@@ -5,6 +5,7 @@ import 'package:remobridge/utility/buttons.dart';
 import 'package:remobridge/utility/colors.dart';
 import 'package:remobridge/view/about_us/about_us.dart';
 import 'package:remobridge/view/animated_scroll_section.dart';
+import 'package:remobridge/view/contact_us/contact_us.dart';
 import 'package:remobridge/view/homepage/first_section.dart';
 import 'package:remobridge/view/homepage/how_we_do_it.dart';
 import 'package:remobridge/view/homepage/our_strategy_section.dart';
@@ -25,10 +26,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   ///VISIBILITY OF ABOUTUS PABE
   bool isHomePageVisible = true;
+  bool isContactUsPageVisible = false;
 
   ///scroll to sponsors and top of page variables and functions
   final ScrollController _scrollController = ScrollController();
@@ -71,16 +71,14 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-
   @override
   void initState() {
     // TODO: implement initState
     isHomePageVisible = true;
-   // body = const AboutUsPage();
+    isContactUsPageVisible = false;
+    // body = const AboutUsPage();
     super.initState();
   }
-
-
 
   @override
   void dispose() {
@@ -91,8 +89,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return
-      SafeArea(
+    return SafeArea(
         child: Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: Container(
@@ -176,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                   Get.offAndToNamed('/contactUs');
                 },
                 child: const NavText(
-                  text: "Contact Us",
+                  text: "ContactUs",
                   color: Colors.black,
                 )),
             const Divider(),
@@ -203,19 +200,23 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         toolbarHeight: 100,
-        title: NavBar(sponsorFunction: () {
-          _scrollToSection(_section2Key);
-        }, aboutUsFunction: () {
-          setState(() {
-            isHomePageVisible = false;
-          });
-          }, contactUsFunction: () {  },
-        homePageVisibility: (){
-          Get.offAllNamed("/");
-          setState(() {
-            isHomePageVisible = true;
-          });
-          },),
+        title: NavBar(
+          sponsorFunction: () {
+            _scrollToSection(_section2Key);
+          },
+          aboutUsFunction: () {
+            setState(() {
+              isHomePageVisible = false;
+            });
+          },
+          contactUsFunction: () {},
+          homePageVisibility: () {
+            Get.offAllNamed("/");
+            setState(() {
+              isHomePageVisible = true;
+            });
+          },
+        ),
         actions: [Container()],
       ),
 
@@ -223,12 +224,17 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Padding(
-          padding: MediaQuery.of(context).size.width < 600? const EdgeInsets.all(0) : const EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 30),
+          padding: MediaQuery.of(context).size.width < 600
+              ? const EdgeInsets.all(0)
+              : const EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Visibility(replacement:   AboutUsPage(sponsorKey: _section2Key,),
-                visible: isHomePageVisible,
+              Visibility(
+                  replacement: AboutUsPage(
+                    sponsorKey: _section2Key,
+                  ),
+                  visible: isHomePageVisible,
                   child: Column(
                     children: [
                       Container(
@@ -244,8 +250,9 @@ class _HomePageState extends State<HomePage> {
 
                       ///HOW WE DO IT SECTION
                       SizedBox(
-                          height:
-                          MediaQuery.of(context).size.width < 600 ? 60 : 200),
+                          height: MediaQuery.of(context).size.width < 600
+                              ? 60
+                              : 200),
                       const HowWeDoIt(),
 
                       const SizedBox(
@@ -281,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                           child: SubHeadlineText(
                               maxLines: 4,
                               text:
-                              '"We are currently seeking sponsors to support our mission of empowering remote workers. \n'
+                                  '"We are currently seeking sponsors to support our mission of empowering remote workers. \n'
                                   'If you’re interested in partnering with us, please contact us."'),
                         ),
                       ),
@@ -306,91 +313,101 @@ class _HomePageState extends State<HomePage> {
                       ),
 
                       ///BOTTOM LINKS
-                      MediaQuery.of(context).size.width < 700? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          BottomLinks(
-                            headerText: "For Businesses",
-                            text1: "Talent Outsourcing",
-                            text2: "Corporate Training",
-                            text3: "Project Implementation",
-                            text4: "Project Advisory",
-                            onTap1: () {},
-                            onTap2: () {},
-                            onTap3: () {},
-                            onTap4: () {},
-                          ),
-                          const SizedBox(height: 40,),
-                          BottomLinks(
-                              headerText: "For Individuals",
-                              text1: "Techpreneurship Program",
-                              text2: "Data Analytics Program",
-                              onTap1: () {},
-                              onTap2: () {}),
-                          BottomLinks(
-                              headerText: "About Us",
-                              text1: "Careers",
-                              text2: "Stories",
-                              onTap1: () {},
-                              onTap2: () {}),
-                          BottomLinks(
-                              headerText: "Contact Us",
-                              text1: "14 Yalinga Crescent , Wuse2 , Abuja, FCT",
-                              text2: "+2348138442423",
-                              text3: "remobridge@outlook.com",
-                              onTap1: () {},
-                              onTap2: () {},
-                              onTap3: (){}),
-                        ],
-                      ) : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Expanded(
-                              child: BottomLinks(
-                                headerText: "For Businesses",
-                                text1: "Talent Outsourcing",
-                                text2: "Corporate Training",
-                                text3: "Project Implementation",
-                                text4: "Project Advisory",
-                                onTap1: () {},
-                                onTap2: () {},
-                                onTap3: () {},
-                                onTap4: () {},
-                              ),
-                            ),
-                            Expanded(
-                              child: BottomLinks(
-                                  headerText: "For Individuals",
-                                  text1: "Techpreneurship Program",
-                                  text2: "Data Analytics Program",
-                                  onTap1: () {},
-                                  onTap2: () {}),
-                            ),
-                            Expanded(
-                              child: BottomLinks(
-                                  headerText: "About Us",
-                                  text1: "Careers",
-                                  text2: "Stories",
-                                  onTap1: () {},
-                                  onTap2: () {}),
-                            ),
-                            Expanded (
-                              child: BottomLinks(
-                                  headerText: "Contact Us",
-                                  text1: "14 Yalinga Street, off Adetokunbo Ademola Crescent, Wuse 2 , Abuja 900288, Federal Capital Territory",
-                                  text2: "+2348138442423",
-                                  text3: "remobridge@outlook.com",
+                      MediaQuery.of(context).size.width < 700
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                BottomLinks(
+                                  headerText: "For Businesses",
+                                  text1: "Talent Outsourcing",
+                                  text2: "Corporate Training",
+                                  text3: "Project Implementation",
+                                  text4: "Project Advisory",
                                   onTap1: () {},
                                   onTap2: () {},
-                                  onTap3: (){}),
+                                  onTap3: () {},
+                                  onTap4: () {},
+                                ),
+                                const SizedBox(
+                                  height: 40,
+                                ),
+                                BottomLinks(
+                                    headerText: "For Individuals",
+                                    text1: "Techpreneurship Program",
+                                    text2: "Data Analytics Program",
+                                    onTap1: () {},
+                                    onTap2: () {}),
+                                BottomLinks(
+                                    headerText: "About Us",
+                                    text1: "Careers",
+                                    text2: "Stories",
+                                    onTap1: () {},
+                                    onTap2: () {}),
+                                BottomLinks(
+                                    headerText: "Contact Us",
+                                    text1:
+                                        "14 Yalinga Crescent , Wuse2 , Abuja, FCT",
+                                    text2: "+2348138442423",
+                                    text3: "remobridge@outlook.com",
+                                    onTap1: () {},
+                                    onTap2: () {},
+                                    onTap3: () {}),
+                              ],
+                            )
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 30.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Expanded(
+                                    child: BottomLinks(
+                                      headerText: "For Businesses",
+                                      text1: "Talent Outsourcing",
+                                      text2: "Corporate Training",
+                                      text3: "Project Implementation",
+                                      text4: "Project Advisory",
+                                      onTap1: () {},
+                                      onTap2: () {},
+                                      onTap3: () {},
+                                      onTap4: () {},
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: BottomLinks(
+                                        headerText: "For Individuals",
+                                        text1: "Techpreneurship Program",
+                                        text2: "Data Analytics Program",
+                                        onTap1: () {},
+                                        onTap2: () {}),
+                                  ),
+                                  Expanded(
+                                    child: BottomLinks(
+                                        headerText: "About Us",
+                                        text1: "Careers",
+                                        text2: "Stories",
+                                        onTap1: () {},
+                                        onTap2: () {}),
+                                  ),
+                                  Expanded(
+                                    child: BottomLinks(
+                                        headerText: "Contact Us",
+                                        text1:
+                                            "14 Yalinga Street, off Adetokunbo Ademola Crescent, Wuse 2 , Abuja 900288, Federal Capital Territory",
+                                        text2: "+2348138442423",
+                                        text3: "remobridge@outlook.com",
+                                        onTap1: () {},
+                                        onTap2: () {},
+                                        onTap3: () {}),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
 
-                      const SizedBox(height: 40,),
+                      const SizedBox(
+                        height: 40,
+                      ),
 
                       ///SOCIAL MEDIA HANDLES
                       const Padding(
@@ -412,16 +429,21 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
+
                     ],
-                  )
-              ),
+                  )),
               const SizedBox(
                 height: 100,
               ),
 
-              const Align(alignment: Alignment.center,  child: Text("copyright 2025 ",)),
+              const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "copyright 2025 ",
+                  )),
+
               ///OBSOLETE FOOTER
-             // const Footer()
+              // const Footer()
             ],
           ),
         ),
@@ -470,7 +492,7 @@ class _BottomLinksState extends State<BottomLinks> {
       children: [
         BodyTextMedium(
           text: widget.headerText,
-         // color: MyColors.teal,
+          // color: MyColors.teal,
         ),
         MouseRegion(
           onHover: (_) {
@@ -566,7 +588,6 @@ class _BottomLinksState extends State<BottomLinks> {
   }
 }
 
-
 class Socials extends StatelessWidget {
   const Socials({super.key});
 
@@ -579,17 +600,27 @@ class Socials extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            IconButton(onPressed: (){}, icon:   Icon(Icons.facebook, color: MyColors.teal,), ),
-            IconButton(onPressed: (){}, icon:   Icon(Icons.tiktok, color: MyColors.teal), ),
-            IconButton(onPressed: (){}, icon:   Icon(Icons.linked_camera_outlined, color: MyColors.teal), )
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.facebook,
+                color: MyColors.teal,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.tiktok, color: MyColors.teal),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.linked_camera_outlined, color: MyColors.teal),
+            )
           ],
         )
       ],
     );
   }
 }
-
-
 
 // Widget aboutUs (BuildContext context){
 //   return

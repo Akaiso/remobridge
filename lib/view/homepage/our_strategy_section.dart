@@ -71,7 +71,7 @@ class OurStrategySection extends StatelessWidget {
       ],
     )
         : Padding(
-      padding: const EdgeInsets.only(left: 35.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

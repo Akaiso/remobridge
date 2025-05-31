@@ -15,6 +15,8 @@ class MyColors extends StatelessWidget {
   static Color gold = const Color(0xfffdbc5a);
   static Color teal = const Color(0xff336666);
   static Color lightBlack =  Colors.black45;
+  static Color lightPink = const Color(0xfffffaf9);
+  static Color darkPink = const Color(0xffffe1e1);
 
   @override
   Widget build(BuildContext context) {

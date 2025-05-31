@@ -65,14 +65,18 @@ class WhiteSubHeadlineText extends StatelessWidget {
 class BodyText extends StatelessWidget {
   final String text ;
   final Color? color;
-  final TextAlign? align;
-  const BodyText({super.key, required this.text, this.color, this.align });
+  final TextAlign? alignLess600;
+  final TextAlign? alignMore600;
+  final int? maxLine;
+
+  const BodyText({super.key, required this.text, this.color, this.alignLess600, this.maxLine, this.alignMore600 });
 
   @override
   Widget build(BuildContext context) {
-    return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : align,
+    return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? alignLess600 : alignMore600,
       text,minFontSize: 8,
       maxFontSize: 15,
+      maxLines: maxLine,
       style: GoogleFonts.montserrat(
         fontWeight: FontWeight.w500,
         color: color,
@@ -82,19 +86,25 @@ class BodyText extends StatelessWidget {
   }
 }
 
-class BodyTextAboutUsTop extends StatelessWidget {
+class SansText extends StatelessWidget {
   final String text ;
   final Color? color;
-  const BodyTextAboutUsTop({super.key, required this.text, this.color });
+  final double? fontSize;
+  final int? maxLines;
+  final TextAlign? alignLess600;
+  final TextAlign? alignMore600;
+  const SansText({super.key, required this.text, this.color, this.fontSize, this.maxLines, this.alignLess600, this.alignMore600 });
 
   @override
   Widget build(BuildContext context) {
-    return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.center,
-      text,minFontSize: 8,
-      maxFontSize: 15,
-      style: GoogleFonts.montserrat(
-        fontWeight: FontWeight.w500,
+    return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? alignLess600 : alignMore600,
+      text,minFontSize: 10,
+      maxFontSize: 50,
+      maxLines: maxLines,
+      style: GoogleFonts.bentham(
+        fontWeight: FontWeight.w600,
         color: color,
+        fontSize: fontSize,
 
       ),
     );
@@ -104,13 +114,15 @@ class BodyTextAboutUsTop extends StatelessWidget {
 class BodyTextMedium extends StatelessWidget {
   final String text ;
   final Color? color;
-  const BodyTextMedium({super.key, required this.text , this.color});
+  final int? maxLines;
+  const BodyTextMedium({super.key, required this.text , this.color, this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(textAlign: MediaQuery.of(context).size.width < 600? TextAlign.center : TextAlign.left,
       text,minFontSize: 18,
       maxFontSize: 18,
+      maxLines: maxLines,
       style: GoogleFonts.montserrat(
         fontWeight: FontWeight.w700,
          color: color,
@@ -159,11 +171,13 @@ class WhiteLeftJustifiedBodyText extends StatelessWidget {
 class NavText extends StatelessWidget {
   final String text;
   final Color color;
-  const NavText({super.key, required this.text, required this.color});
+  final int? maxLine;
+  final double? letterSpacing;
+  const NavText({super.key, required this.text, required this.color, this.maxLine, this.letterSpacing});
 
   @override
   Widget build(BuildContext context) {
-    return  AutoSizeText(text, style: TextStyle(
+    return  AutoSizeText(text, maxLines: maxLine, style: TextStyle(letterSpacing: letterSpacing,
       fontWeight: FontWeight.w700,
       color: color,
       fontSize: 15,
